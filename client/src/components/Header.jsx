@@ -50,8 +50,8 @@ const Header = () => {
       </div>
 
       <div className='text-center my-8'>
-        <h1 className='text-3xl sm:text-5xl font-medium'>Latest Blogs</h1>
-        <p className='mt-10 max-w-[740px] m-auto text-xs sm:text-base'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, excepturi!</p>
+        <h1 className='text-3xl sm:text-5xl font-medium'>Welcome to Aiblog</h1>
+        <p className='mt-10 max-w-[740px] m-auto text-xs sm:text-base'>Discover the latest news, tutorials, and insights on Artificial Intelligence. Subscribe to our newsletter to stay updated with the rapidly evolving world of AI.</p>
         <form onSubmit={handleSubscribe} className='flex justify-between max-w-[500px] scale-75 sm:scale-100 mx-auto mt-10 border border-black shadow-[-7px_7px_0px_#000000]'>
           <input
             type="email"
