@@ -2,30 +2,45 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import { apiService } from '../../services/api';
+import { toast } from 'react-toastify';
 
 const List = () => {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchList = async () => {
-      try {
-        setLoading(true);
-        // Pass mine=true to get only my posts (including drafts)
-        const data = await apiService.getPosts({ mine: true });
-        // Handle both old and new API responses
-        const posts = data.posts || data;
-        setList(Array.isArray(posts) ? posts : []);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-        setList([]);
-      } finally {
-        setLoading(false);
-      }
+  const fetchList = async () => {
+    try {
+      setLoading(true);
+      // Pass mine=true to get only my posts (including drafts)
+      const data = await apiService.getPosts({ mine: true });
+      // Handle both old and new API responses
+      const posts = data.posts || data;
+      setList(Array.isArray(posts) ? posts : []);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      setList([]);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     fetchList();
   }, [])
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      try {
+        await apiService.deletePost(id);
+        toast.success('Post deleted successfully');
+        fetchList();
+      } catch (error) {
+        console.error('Error deleting post:', error);
+        toast.error('Failed to delete post');
+      }
+    }
+  };
 
   return (
     <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'>
@@ -68,12 +83,20 @@ const List = () => {
                     {new Date(item.createdAt).toDateString()}
                   </td>
                   <td className='px-6 py-4 cursor-pointer'>
-                    <button
-                      onClick={() => navigate(`/admin/edit/${item._id}`)}
-                      className='text-blue-600 hover:text-blue-800 font-medium'
-                    >
-                      Edit
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => navigate(`/admin/edit/${item._id}`)}
+                        className='text-blue-600 hover:text-blue-800 font-medium'
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className='text-red-600 hover:text-red-800 font-medium'
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               })}

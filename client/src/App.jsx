@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,14 +13,41 @@ import CommentModeration from './pages/admin/CommentModeration';
 import Sidebar from './components/Sidebar';
 import { assets } from './assets/assets';
 import Profile from './pages/admin/Profile';
+import { apiService } from './services/api';
 
 // Admin Layout Component
 const AdminLayout = ({ children }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [profileImg, setProfileImg] = useState(assets.user_icon);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const user = await apiService.getMe();
+        if (user && user.profileImg) {
+          setProfileImg(user.profileImg);
+        }
+      } catch (error) {
+        console.error('Error fetching profile for header:', error);
+      }
+    };
+
+    fetchProfile();
+
+    const handleAuthChange = () => {
+      fetchProfile();
+    };
+
+    window.addEventListener('auth-change', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('auth-change', handleAuthChange);
+    };
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.dispatchEvent(new Event('auth-change'));
+    window.dispatchEvent(new Event('auth-change')); // Optional: might not be needed if redirecting immediately
     window.location.href = '/admin';
   };
 
@@ -32,9 +59,9 @@ const AdminLayout = ({ children }) => {
           <h3 className='font-medium'>Admin Panel</h3>
           <div className="relative">
             <img
-              src={assets.user_icon}
+              src={profileImg}
               alt=""
-              className='w-7 cursor-pointer'
+              className='w-7 h-7 rounded-full object-cover cursor-pointer'
               onClick={() => setShowDropdown(!showDropdown)}
             />
             {showDropdown && (

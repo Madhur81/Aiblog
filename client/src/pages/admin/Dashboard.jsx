@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -14,6 +15,7 @@ const Dashboard = () => {
         setStats(data);
       } catch (error) {
         console.error('Failed to fetch dashboard stats:', error);
+        setError(error.message || 'Failed to load dashboard stats');
       } finally {
         setLoading(false);
       }
@@ -29,10 +31,16 @@ const Dashboard = () => {
     );
   }
 
-  if (!stats) {
+  if (error) {
     return (
       <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'>
-        <p className='text-xl text-red-600'>Failed to load dashboard stats</p>
+        <p className='text-xl text-red-600'>Error: {error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className='mt-4 bg-black text-white px-4 py-2 rounded'
+        >
+          Retry
+        </button>
       </div>
     );
   }
@@ -135,8 +143,8 @@ const Dashboard = () => {
                     </p>
                   </div>
                   <span className={`text-xs px-2 py-1 rounded ${comment.status === 'approved' ? 'bg-green-100 text-green-700' :
-                      comment.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                        'bg-yellow-100 text-yellow-700'
+                    comment.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                      'bg-yellow-100 text-yellow-700'
                     }`}>
                     {comment.status}
                   </span>
