@@ -45,6 +45,10 @@ if (process.env.MONGODB_URI) {
   console.log('MONGODB_URI not found in .env. Skipping DB connection.');
 }
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
