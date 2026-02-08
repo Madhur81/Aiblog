@@ -1,0 +1,50 @@
+{
+  "Technology": [
+    "The Future of Artificial Intelligence in 2025",
+    "Quantum Computing: A Beginner's Guide",
+    "The Rise of Edge Computing",
+    "Cybersecurity Best Practices for Remote Workers",
+    "5G vs 6G: What's Next in Connectivity?",
+    "The Impact of Blockchain Beyond Cryptocurrency",
+    "Smart Homes: The Ultimate Guide to Automation",
+    "Wearable Tech: Measuring Health and Performance",
+    "The Ethics of AI: Navigating the New Frontier",
+    "Cloud Computing Trends to Watch"
+  ],
+  "Coding": [
+    "Mastering React Hooks: A Comprehensive Guide",
+    "Node.js Performance Optimization Tips",
+    "Understanding TypeScript Generics",
+    "CSS Grid vs. Flexbox: When to Use Which",
+    "Building Scalable Microservices with Docker",
+    "The Art of Clean Code",
+    "REST vs. GraphQL: Choosing the Right API Style",
+    "Introduction to WebAssembly",
+    "Debugging JavaScript Like a Pro",
+    "A Guide to Modern State Management"
+  ],
+  "Lifestyle": [
+    "10 Habits for a More Productive Morning",
+    "The Benefits of Digital Detox",
+    "Minimalism: How to Declutter Your Life",
+    "Work-Life Balance for Remote Employees",
+    "Healthy Meal Prepping on a Budget",
+    "The Power of Mindfulness Meditation",
+    "Sustainable Living: Simple Steps to Go Green",
+    "Travel Hacking: Seeing the World for Less",
+    "Setting and Achieving Personal Goals",
+    "The Science of Sleep: Why It Matters"
+  ],
+  "Startup & Business": [
+    "How to Validate Your Startup Idea",
+    "Bootstrapping vs. Venture Capital",
+    "Building a Personal Brand in the Digital Age",
+    "Effective Remote Team Management",
+    "The Psychology of Pricing",
+    "Marketing Strategies for 2024",
+    "Customer Retention Tactics That Work",
+    "The Gig Economy: Pros and Cons",
+    "Leadership Skills for New Managers",
+    "Navigating the Post-Pandemic Economy"
+  ]
+}
